@@ -1,27 +1,39 @@
 $(document).ready(function() {
 	$('form').submit(function(event) {
-	 	if ($('#input-value').val() == '') {
-	    	return false;}; 
-			  var x = $('#input-value').val();
-			  	var x = parseInt(x);
-	      		var y = 1;
-				do {
-	          		if (y%15 == 0) {
-	             	 	y++;
-	             		$(this).parent().children().append('<div>' + "Fizz Buzz" + '</div>');}
-	          		else if (y%3 == 0) {
-	            		y++;
-	            		$(this).parent().children().append('<div>' + 'Fizz' + '</div>');}
-	          		else if (y%5 == 0) {
-	            		y++;
-	            		$(this).parent().children().append('<div>' + "Buzz" + '</div>');}
-	          		else {
-	            		$(this).parent().children().append('<div>' + y + '</div>');
-	            		y++;};}
-	        	while (y <= x );
-	 
+		var userinput = $('#input-value').val();
+	 	if (userinput == '') {
+	    	return false;
+	    }; 
+
+		var x = parseInt(userinput);
+		fizzBuzz(x);
+
 		$('#input-value').val('');
-			event.preventDefault();});})
+		event.preventDefault();})
+
 		.on('click', '.clear', function() {
 	  	$('div').remove();
-});
+	  	});
+
+	  	function fizzBuzz(x) {
+	    	var y = 1;
+	    	var html = '';
+			do {
+	          		if (y%15 == 0) {
+	             		html += '<div>' + "Fizz Buzz" + '</div>';
+	             	}
+	          		else if (y%3 == 0) {
+	            		html += '<div>' + 'Fizz' + '</div>';
+	            	}
+	          		else if (y%5 == 0) {
+	            		html += '<div>' + "Buzz" + '</div>';
+	            	}
+	          		else {
+	            		html += '<div>' + y + '</div>';
+					}
+					y++;
+				}
+	        	while (y <= x );
+	        	$('body').append(html);
+		}
+})
